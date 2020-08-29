@@ -1,0 +1,20 @@
+version: "3"
+services:
+  redis-server:
+    image: "redis"
+  publisher:
+    build:
+      dockerfile: Dockerfile
+      context: ./publisher
+    depends_on:
+      - redis-server
+      - subscriber
+  subscriber:
+    build:
+      dockerfile: Dockerfile
+      context: ./subscriber
+    depends_on:
+      - redis-server
+#    ports:
+#      - "4001:5000"
+
